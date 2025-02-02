@@ -3,10 +3,11 @@ package server
 import (
 	"context"
 	"fmt"
+	"github.com/8soat-grupo35/fastfood-order/internal/api/handlers"
 	"net/http"
 
-	_ "github.com/8soat-grupo35/fastfood-order-production/docs"
-	"github.com/8soat-grupo35/fastfood-order-production/internal/external"
+	_ "github.com/8soat-grupo35/fastfood-order/docs"
+	"github.com/8soat-grupo35/fastfood-order/internal/external"
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )
@@ -39,6 +40,27 @@ func newApp(cfg external.Config) *echo.Echo {
 	app.GET("/", func(echo echo.Context) error {
 		return echo.JSON(http.StatusOK, "Alive")
 	})
+
+	customerHandler := handlers.NewCustomerHandler(external.DB)
+	customerGroupV1 := app.Group("/v1/customer")
+	customerGroupV1.GET("", customerHandler.GetAll)
+	customerGroupV1.GET("/cpf/:cpf", customerHandler.GetByCpf)
+	customerGroupV1.POST("", customerHandler.Create)
+	customerGroupV1.PUT("/:id", customerHandler.Update)
+	customerGroupV1.DELETE("/:id", customerHandler.Delete)
+
+	itemHandler := handlers.NewItemHandler(external.DB)
+	itemV1Group := app.Group("/v1/item")
+	itemV1Group.GET("", itemHandler.GetAll)
+	itemV1Group.POST("", itemHandler.Create)
+	itemV1Group.PUT("/:id", itemHandler.Update)
+	itemV1Group.DELETE("/:id", itemHandler.Delete)
+
+	orderHandler := handlers.NewOrderHandler(external.DB)
+	orderV1Group := app.Group("/v1/orders")
+	orderV1Group.GET("", orderHandler.GetAll)
+	orderV1Group.POST("/checkout", orderHandler.Checkout)
+	orderV1Group.PATCH("/:id", orderHandler.UpdateStatus)
 
 	return app
 }

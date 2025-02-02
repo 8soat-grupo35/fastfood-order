@@ -1,4 +1,4 @@
-module github.com/8soat-grupo35/fastfood-order-production
+module github.com/8soat-grupo35/fastfood-order
 
 go 1.22.2
 
