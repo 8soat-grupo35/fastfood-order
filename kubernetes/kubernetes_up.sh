@@ -1,4 +1,4 @@
-docker build -t fastfood-app:latest .
+docker build -t fastfood-order:latest .
 kubectl apply -f kubernetes/postgres-pv.yaml
 kubectl apply -f kubernetes/postgres-pvc.yaml
 kubectl apply -f kubernetes/postgres-deploy.yaml

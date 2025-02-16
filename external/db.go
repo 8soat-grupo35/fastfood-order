@@ -19,7 +19,7 @@ func ConectaDB(host, user, password, dbname, port string) {
 	db, err := gorm.Open(postgres.Open(conexao))
 
 	if err != nil {
-		log.Panic("Erro na conexao com banco de dados")
+		log.Println("Erro na conexao com banco de dados")
 	}
 
 	DB = db

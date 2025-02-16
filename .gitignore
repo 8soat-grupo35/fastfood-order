@@ -23,3 +23,20 @@ go.work.sum
 
 # env file
 .env
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+
+# Go modules
+go.sum
+
+# Binary output directories
+bin/
+build/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
