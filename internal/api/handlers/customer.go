@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/8soat-grupo35/fastfood-order/internal/adapters/dto"
 	"github.com/8soat-grupo35/fastfood-order/internal/controllers"
+	controllersInterface "github.com/8soat-grupo35/fastfood-order/internal/interfaces/controllers"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 	"net/http"
@@ -10,7 +11,7 @@ import (
 )
 
 type CustomerHandler struct {
-	customerController *controllers.CustomerController
+	customerController controllersInterface.CustomerController
 }
 
 func NewCustomerHandler(db *gorm.DB) CustomerHandler {
@@ -71,7 +72,7 @@ func (h *CustomerHandler) Update(echo echo.Context) error {
 		return echo.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	customer, err := h.customerController.Update(id, customerDto)
+	customer, err := h.customerController.Update(uint32(id), customerDto)
 
 	if err != nil {
 		return echo.JSON(http.StatusInternalServerError, err.Error())
@@ -87,7 +88,7 @@ func (h *CustomerHandler) Delete(echo echo.Context) error {
 		return echo.JSON(http.StatusBadRequest, err.Error())
 	}
 
-	err = h.customerController.Delete(id)
+	err = h.customerController.Delete(uint32(id))
 
 	if err != nil {
 		return echo.JSON(http.StatusNotFound, err.Error())
@@ -110,7 +111,7 @@ func (h CustomerHandler) GetByCpf(echo echo.Context) error {
 
 	cpf := echo.Param("cpf")
 
-	customer, err := h.customerController.GetByCPF(cpf)
+	customer, err := h.customerController.GetByCpf(cpf)
 
 	if err != nil {
 		return echo.JSON(http.StatusNotFound, err.Error())

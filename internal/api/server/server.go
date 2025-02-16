@@ -3,11 +3,11 @@ package server
 import (
 	"context"
 	"fmt"
+	"github.com/8soat-grupo35/fastfood-order/external"
 	"github.com/8soat-grupo35/fastfood-order/internal/api/handlers"
 	"net/http"
 
 	_ "github.com/8soat-grupo35/fastfood-order/docs"
-	"github.com/8soat-grupo35/fastfood-order/internal/external"
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
 )

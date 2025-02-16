@@ -3,6 +3,7 @@ package handlers
 import (
 	"github.com/8soat-grupo35/fastfood-order/internal/adapters/dto"
 	"github.com/8soat-grupo35/fastfood-order/internal/controllers"
+	controllersInterface "github.com/8soat-grupo35/fastfood-order/internal/interfaces/controllers"
 	"net/http"
 	"strconv"
 
@@ -11,7 +12,7 @@ import (
 )
 
 type OrderHandler struct {
-	orderController *controllers.OrderController
+	orderController controllersInterface.OrderController
 }
 
 func NewOrderHandler(db *gorm.DB) OrderHandler {

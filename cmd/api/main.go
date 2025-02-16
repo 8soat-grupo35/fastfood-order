@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/8soat-grupo35/fastfood-order/external"
 
 	"github.com/8soat-grupo35/fastfood-order/internal/api/server"
-	"github.com/8soat-grupo35/fastfood-order/internal/external"
 )
 
 func main() {

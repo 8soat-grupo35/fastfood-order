@@ -1,9 +1,9 @@
 module github.com/8soat-grupo35/fastfood-order
 
-go 1.22.2
+go 1.23
 
 require (
-	github.com/golang/mock v1.6.0
+	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.9.0

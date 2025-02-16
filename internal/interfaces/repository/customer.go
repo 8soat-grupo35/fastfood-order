@@ -2,7 +2,7 @@ package repository
 
 import "github.com/8soat-grupo35/fastfood-order/internal/entities"
 
-//go:generate mockgen -source=customer.go -destination=../../../test/gateways/mock/customer_mock.go
+//go:generate mockgen -source=customer.go -destination=mock/customer.go
 type CustomerRepository interface {
 	GetAll() ([]entities.Customer, error)
 	GetOne(entities.Customer) (*entities.Customer, error)

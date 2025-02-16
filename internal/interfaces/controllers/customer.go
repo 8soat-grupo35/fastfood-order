@@ -1,4 +1,4 @@
-package usecase
+package controllers
 
 import (
 	"github.com/8soat-grupo35/fastfood-order/internal/adapters/dto"
@@ -6,7 +6,7 @@ import (
 )
 
 //go:generate mockgen -source=customer.go -destination=mock/customer.go
-type CustomerUseCase interface {
+type CustomerController interface {
 	GetAll() ([]entities.Customer, error)
 	Create(dto.CustomerDto) (*entities.Customer, error)
 	GetByCpf(cpf string) (*entities.Customer, error)

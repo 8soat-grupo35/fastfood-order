@@ -2,7 +2,7 @@ package repository
 
 import "github.com/8soat-grupo35/fastfood-order/internal/entities"
 
-//go:generate mockgen -source=order.go -destination=../../../test/gateways/mock/order_mock.go
+//go:generate mockgen -source=order.go -destination=mock/order.go
 type OrderRepository interface {
 	GetAll() ([]entities.Order, error)
 	GetById(id uint32) (*entities.Order, error)
