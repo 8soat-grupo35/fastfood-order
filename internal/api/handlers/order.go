@@ -5,6 +5,8 @@ import (
 	"github.com/8soat-grupo35/fastfood-order/internal/controllers"
 	controllersInterface "github.com/8soat-grupo35/fastfood-order/internal/interfaces/controllers"
 	"net/http"
+
+	httpClient "github.com/8soat-grupo35/fastfood-order/internal/adapters/http"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -15,9 +17,9 @@ type OrderHandler struct {
 	orderController controllersInterface.OrderController
 }
 
-func NewOrderHandler(db *gorm.DB) OrderHandler {
+func NewOrderHandler(db *gorm.DB, httpClient *httpClient.Client) OrderHandler {
 	return OrderHandler{
-		orderController: controllers.NewOrderController(db),
+		orderController: controllers.NewOrderController(db, httpClient),
 	}
 }
 
