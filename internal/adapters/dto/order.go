@@ -1,5 +1,9 @@
 package dto
 
+const (
+	PAYMENT_STATUS_WAITING = 1
+)
+
 type OrderItemDto struct {
 	Id       uint32 `json:"id"`
 	Quantity uint32 `json:"quantity"`
@@ -18,3 +22,8 @@ type OrderStatusDto struct {
 type OrderPaymentStatusDto struct {
 	Status string `json:"status"`
 } //@name OrderPaymentStatusDto
+
+type OrderPaymentDto struct {
+	OrderID         int `json:"id"`
+	PaymentStatusID int `json:"payment_status_id"`
+} //@name OrderPaymentDto

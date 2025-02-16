@@ -46,7 +46,7 @@ func (suite *CustomerUseCaseSuite) TestGetAllReturnsErrorOnFailure() {
 
 	customers, err := suite.useCase.GetAll()
 	assert.Error(suite.T(), err)
-	assert.Nil(suite.T(), customers)
+	assert.Empty(suite.T(), customers)
 	assert.Equal(suite.T(), "get customer from repository has failed", err.Error())
 }
 

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"sync"
+	"time"
 
 	"github.com/spf13/viper"
 )
@@ -11,6 +12,7 @@ import (
 type Config struct {
 	ServerHost     string
 	DatabaseConfig DatabaseConfig
+	HttpConfig     HttpConfig
 }
 
 type DatabaseConfig struct {
@@ -19,6 +21,11 @@ type DatabaseConfig struct {
 	User     string
 	Password string
 	DbName   string
+}
+
+type HttpConfig struct {
+	ServiceURL string
+	Timeout    time.Duration
 }
 
 var (
@@ -40,6 +47,10 @@ func GetConfig() Config {
 				User:     cfg.GetString("database.user"),
 				Password: cfg.GetString("database.password"),
 				DbName:   cfg.GetString("database.dbname"),
+			},
+			HttpConfig: HttpConfig{
+				ServiceURL: cfg.GetString("http.service_url"),
+				Timeout:    cfg.GetDuration("http.timeout"),
 			},
 		}
 	})
@@ -66,4 +77,6 @@ func initDefaults(config *viper.Viper) {
 	config.SetDefault("database.user", "root")
 	config.SetDefault("database.password", "root")
 	config.SetDefault("database.dbname", "root")
+	config.SetDefault("http.service_url", "http://localhost:8080")
+	config.SetDefault("http.timeout", 5*time.Second)
 }

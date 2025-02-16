@@ -13,15 +13,17 @@ import (
 
 type OrderControllerSuite struct {
 	suite.Suite
-	ctrl       *gomock.Controller
-	useCase    *mockUsecase.MockOrderUseCase
-	controller *OrderController
+	ctrl                *gomock.Controller
+	useCase             *mockUsecase.MockOrderUseCase
+	orderPaymentUseCase *mockUsecase.MockOrderPaymentUseCase
+	controller          *OrderController
 }
 
 func (suite *OrderControllerSuite) SetupTest() {
 	suite.ctrl = gomock.NewController(suite.T())
 	suite.useCase = mockUsecase.NewMockOrderUseCase(suite.ctrl)
-	suite.controller = &OrderController{UseCase: suite.useCase}
+	suite.orderPaymentUseCase = mockUsecase.NewMockOrderPaymentUseCase(suite.ctrl)
+	suite.controller = &OrderController{UseCase: suite.useCase, OrderPaymentUseCase: suite.orderPaymentUseCase}
 }
 
 func (suite *OrderControllerSuite) TearDownTest() {
@@ -51,6 +53,7 @@ func (suite *OrderControllerSuite) TestCheckout() {
 	}
 
 	suite.useCase.EXPECT().Create(gomock.Any()).Return(newOrder, nil)
+	suite.orderPaymentUseCase.EXPECT().Create(*newOrder).Return(nil)
 
 	createdOrder, err := suite.controller.Checkout(orderDto)
 	assert.NoError(suite.T(), err)

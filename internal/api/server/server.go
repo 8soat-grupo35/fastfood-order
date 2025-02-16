@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/8soat-grupo35/fastfood-order/external"
+	httpClient "github.com/8soat-grupo35/fastfood-order/internal/adapters/http"
 	"github.com/8soat-grupo35/fastfood-order/internal/api/handlers"
 	"net/http"
 
@@ -34,6 +35,7 @@ func Start(cfg external.Config) {
 // @BasePath /v1
 func newApp(cfg external.Config) *echo.Echo {
 	external.ConectaDB(cfg.DatabaseConfig.Host, cfg.DatabaseConfig.User, cfg.DatabaseConfig.Password, cfg.DatabaseConfig.DbName, cfg.DatabaseConfig.Port)
+	paymentClient := httpClient.NewClient(cfg.HttpConfig.ServiceURL, cfg.HttpConfig.Timeout)
 
 	app := echo.New()
 	app.GET("/swagger/*", echoSwagger.WrapHandler)
@@ -56,7 +58,7 @@ func newApp(cfg external.Config) *echo.Echo {
 	itemV1Group.PUT("/:id", itemHandler.Update)
 	itemV1Group.DELETE("/:id", itemHandler.Delete)
 
-	orderHandler := handlers.NewOrderHandler(external.DB)
+	orderHandler := handlers.NewOrderHandler(external.DB, paymentClient)
 	orderV1Group := app.Group("/v1/orders")
 	orderV1Group.GET("", orderHandler.GetAll)
 	orderV1Group.POST("/checkout", orderHandler.Checkout)
