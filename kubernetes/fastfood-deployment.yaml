@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastfood-order
+  name: fastfood-order-app
   labels:
-    app: fastfood-order
+    app: fastfood-order-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fastfood-order
+      app: fastfood-order-app
   template:
     metadata:
-      name: fastfood-order
+      name: fastfood-order-app
       labels:
-        app: fastfood-order
+        app: fastfood-order-app
     spec:
       containers:
-        - name: fastfood-order
-          image: fastfood-order
+        - name: fastfood-order-app
+          image: fastfood-order-app
           imagePullPolicy: Never
           ports:
             - containerPort: 8000

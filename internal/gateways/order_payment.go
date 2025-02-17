@@ -22,7 +22,7 @@ func (o orderPaymentGateway) Create(orderPayment dto.OrderPaymentDto) error {
 	if err != nil {
 		return err
 	}
-	_, err = o.client.Post("/order-payment", bytes.NewReader(orderData))
+	_, err = o.client.Post("/v1/payments", bytes.NewReader(orderData))
 	if err != nil {
 		return err
 	}

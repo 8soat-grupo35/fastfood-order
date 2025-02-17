@@ -17,8 +17,7 @@ func NewOrderPaymentUseCase(orderPaymentRepository repository.OrderPaymentReposi
 
 func (o *orderPaymentUseCase) Create(order entities.Order) error {
 	newOrderPayment := dto.OrderPaymentDto{
-		OrderID:         int(order.ID),
-		PaymentStatusID: dto.PAYMENT_STATUS_WAITING,
+		OrderID: int(order.ID),
 	}
 	return o.orderPaymentRepository.Create(newOrderPayment)
 }

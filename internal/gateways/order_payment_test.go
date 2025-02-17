@@ -29,8 +29,8 @@ func (suite *OrderPaymentRepositorySuite) TearDownTest() {
 }
 
 func (suite *OrderPaymentRepositorySuite) TestCreate() {
-	orderPaymentDto := dto.OrderPaymentDto{OrderID: 1, PaymentStatusID: dto.PAYMENT_STATUS_WAITING}
-	suite.client.EXPECT().Post("/order-payment", gomock.Any()).Return(nil, nil)
+	orderPaymentDto := dto.OrderPaymentDto{OrderID: 1}
+	suite.client.EXPECT().Post("/v1/payments", gomock.Any()).Return(nil, nil)
 
 	err := suite.repo.Create(orderPaymentDto)
 	assert.NoError(suite.T(), err)
@@ -38,7 +38,7 @@ func (suite *OrderPaymentRepositorySuite) TestCreate() {
 
 func (suite *OrderPaymentRepositorySuite) TestCreateReturnsErrorOnClientFailure() {
 	orderPaymentDto := dto.OrderPaymentDto{OrderID: 1}
-	suite.client.EXPECT().Post("/order-payment", gomock.Any()).Return(nil, errors.New("client error"))
+	suite.client.EXPECT().Post("/v1/payments", gomock.Any()).Return(nil, errors.New("client error"))
 
 	err := suite.repo.Create(orderPaymentDto)
 	assert.Error(suite.T(), err)
