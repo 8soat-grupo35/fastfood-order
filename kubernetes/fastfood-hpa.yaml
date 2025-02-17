@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: fastfood-order-hpa
+  name: fastfood-order-app-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: fastfood-order
+    name: fastfood-order-app
   minReplicas: 1
   maxReplicas: 10
   metrics:

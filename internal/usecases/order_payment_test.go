@@ -32,8 +32,7 @@ func (suite *OrderPaymentUseCaseSuite) TearDownTest() {
 func (suite *OrderPaymentUseCaseSuite) TestCreate() {
 	order := entities.Order{ID: 1}
 	orderPayment := dto.OrderPaymentDto{
-		OrderID:         int(order.ID),
-		PaymentStatusID: dto.PAYMENT_STATUS_WAITING,
+		OrderID: int(order.ID),
 	}
 	suite.repo.EXPECT().Create(orderPayment).Return(nil)
 
@@ -44,8 +43,7 @@ func (suite *OrderPaymentUseCaseSuite) TestCreate() {
 func (suite *OrderPaymentUseCaseSuite) TestCreateReturnsErrorOnClientFailure() {
 	order := entities.Order{ID: 1}
 	orderPayment := dto.OrderPaymentDto{
-		OrderID:         int(order.ID),
-		PaymentStatusID: dto.PAYMENT_STATUS_WAITING,
+		OrderID: int(order.ID),
 	}
 	suite.repo.EXPECT().Create(orderPayment).Return(errors.New("client error"))
 

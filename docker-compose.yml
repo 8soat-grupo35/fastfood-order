@@ -7,11 +7,15 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=root      
     restart: always
+    volumes:
+      - ./migration/docker-database-initial.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U root"]
       interval: 10s
       timeout: 5s
       retries: 5
+    ports:
+      - "5432:5432"
 
   fastfood_order:
     depends_on:
