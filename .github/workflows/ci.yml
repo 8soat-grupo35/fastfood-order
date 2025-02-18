@@ -24,6 +24,15 @@ jobs:
       - name: Run tests
         run: go test -short -coverprofile=cov.out $(go list ./internal/... | grep -v /mock)
 
+      - name: Start test environment
+        run: docker compose up -d
+
+      - name: Pausa
+        run: sleep 40
+
+      - name: Run BDD tests
+        run: ginkgo -v ./integration/BDD
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
         env:
