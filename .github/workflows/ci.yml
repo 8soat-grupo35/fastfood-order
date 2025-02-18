@@ -24,6 +24,9 @@ jobs:
       - name: Run tests
         run: go test -short -coverprofile=cov.out $(go list ./internal/... | grep -v /mock)
 
+      - name: Set Up BDD Tests Dependencies
+        run: go install github.com/onsi/ginkgo/v2/ginkgo@latest
+
       - name: Start test environment
         run: docker compose up -d
 
