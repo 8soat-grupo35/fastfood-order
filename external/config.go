@@ -42,15 +42,15 @@ func GetConfig() Config {
 		config = Config{
 			ServerHost: cfg.GetString("server.host"),
 			DatabaseConfig: DatabaseConfig{
-				Host:     cfg.GetString("database.host"),
-				Port:     cfg.GetString("database.port"),
-				User:     cfg.GetString("database.user"),
-				Password: cfg.GetString("database.password"),
-				DbName:   cfg.GetString("database.dbname"),
+				Host:     cfg.GetString("DATABASE_HOST"),
+				Port:     cfg.GetString("DATABASE_PORT"),
+				User:     cfg.GetString("DATABASE_USER"),
+				Password: cfg.GetString("DATABASE_PASSWORD"),
+				DbName:   cfg.GetString("DATABASE_DBNAME"),
 			},
 			HttpConfig: HttpConfig{
-				ServiceURL: cfg.GetString("http.service_url"),
-				Timeout:    cfg.GetDuration("http.timeout"),
+				ServiceURL: cfg.GetString("FASTFOOD_PAYMENT_APP_URL"),
+				Timeout:    cfg.GetDuration("HTTP_TIMEOUT"),
 			},
 		}
 	})
@@ -62,21 +62,23 @@ func initConfig() (viper.Viper, error) {
 	cfg := viper.New()
 	var err error
 	initDefaults(cfg)
+	cfg.AutomaticEnv()
 	// workaround because viper does not resolve envs when unmarshalling
 	for _, key := range cfg.AllKeys() {
 		val := cfg.Get(key)
 		cfg.Set(key, val)
 	}
+	fmt.Println(cfg)
 	return *cfg, err
 }
 
 func initDefaults(config *viper.Viper) {
 	config.SetDefault("server.host", "0.0.0.0:8000")
-	config.SetDefault("database.host", "postgres")
-	config.SetDefault("database.port", "5432")
-	config.SetDefault("database.user", "root")
-	config.SetDefault("database.password", "root")
-	config.SetDefault("database.dbname", "root")
-	config.SetDefault("http.service_url", "http://localhost:8080")
-	config.SetDefault("http.timeout", 5*time.Second)
+	config.SetDefault("DATABASE_HOST", "postgres")
+	config.SetDefault("DATABASE_PORT", "5432")
+	config.SetDefault("DATABASE_USER", "root")
+	config.SetDefault("DATABASE_PASSWORD", "root")
+	config.SetDefault("DATABASE_DBNAME", "root")
+	config.SetDefault("FASTFOOD_PAYMENT_APP_URL", "http://localhost:8080")
+	config.SetDefault("HTTP_TIMEOUT", 5*time.Second)
 }
