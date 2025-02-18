@@ -20,9 +20,6 @@ jobs:
 
       - name: Install dependencies
         run: go mod download
-
-      - name: Generate mocks
-        run: go generate ./...
       
       - name: Run tests
         run: go test -short -coverprofile=cov.out $(go list ./internal/... | grep -v /mock)
