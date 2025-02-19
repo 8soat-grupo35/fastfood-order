@@ -69,7 +69,7 @@ func initConfig() (viper.Viper, error) {
 		val := cfg.Get(key)
 		cfg.Set(key, val)
 	}
-	
+
 	fmt.Println(cfg)
 	return *cfg, err
 }
@@ -81,6 +81,6 @@ func initDefaults(config *viper.Viper) {
 	config.SetDefault("DATABASE_USER", "root")
 	config.SetDefault("DATABASE_PASSWORD", "root")
 	config.SetDefault("DATABASE_DBNAME", "root")
-	config.SetDefault("FASTFOOD_PAYMENT_APP_URL", "http://a71651bd431364e399616a6c8cb93a80-882634322.us-east-1.elb.amazonaws.com:8000")
+	config.SetDefault("FASTFOOD_PAYMENT_APP_URL", "http://localhost:8080")
 	config.SetDefault("HTTP_TIMEOUT", 5*time.Second)
 }
