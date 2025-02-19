@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: fastfood-order-app
-          image: fastfood-order-app
-          imagePullPolicy: IfNotPresent
+          image: fastfood-order-app:latest
+          imagePullPolicy: Always
           envFrom:
             - secretRef:
                 name: database-secret
