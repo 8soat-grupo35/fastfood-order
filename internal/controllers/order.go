@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/8soat-grupo35/fastfood-order/internal/adapters/dto"
 	"github.com/8soat-grupo35/fastfood-order/internal/entities"
 	"github.com/8soat-grupo35/fastfood-order/internal/gateways"
@@ -40,6 +41,7 @@ func (o *OrderController) Checkout(orderDto dto.OrderDto) (*presenters.OrderPres
 
 	err = o.OrderPaymentUseCase.Create(*order)
 	if err != nil {
+		fmt.Println("Error creating order payment")
 		return nil, err
 	}
 

@@ -61,6 +61,7 @@ func GetConfig() Config {
 func initConfig() (viper.Viper, error) {
 	cfg := viper.New()
 	var err error
+
 	initDefaults(cfg)
 	cfg.AutomaticEnv()
 	// workaround because viper does not resolve envs when unmarshalling
@@ -68,6 +69,7 @@ func initConfig() (viper.Viper, error) {
 		val := cfg.Get(key)
 		cfg.Set(key, val)
 	}
+	
 	fmt.Println(cfg)
 	return *cfg, err
 }
