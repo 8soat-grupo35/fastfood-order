@@ -42,7 +42,7 @@ func (c *Client) Post(path string, body io.Reader) ([]byte, error) {
 			return nil, err
 		}
 		defer resp.Body.Close()
-		if resp.StatusCode != http.StatusCreated {
+		if resp.StatusCode != http.StatusOK {
 			return nil, fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 		}
 		responseBody, err := io.ReadAll(resp.Body)
