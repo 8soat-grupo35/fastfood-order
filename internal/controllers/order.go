@@ -42,7 +42,7 @@ func (o *OrderController) Checkout(orderDto dto.OrderDto) (*presenters.OrderPres
 	err = o.OrderPaymentUseCase.Create(*order)
 	if err != nil {
 		fmt.Println("Error creating order payment")
-		return nil, err
+		//return nil, err
 	}
 
 	return &presenters.OrderPresenter{Id: order.ID}, nil
