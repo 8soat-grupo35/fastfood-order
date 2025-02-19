@@ -32,7 +32,7 @@ func (suite *ClientTestSuite) TestPostReturnsResponseBodyOnSuccess() {
 	suite.client.HTTPClient = &http.Client{
 		Transport: &mockTransport{
 			response: &http.Response{
-				StatusCode: http.StatusCreated,
+				StatusCode: http.StatusOK,
 				Body:       io.NopCloser(strings.NewReader(body)),
 			},
 		},
