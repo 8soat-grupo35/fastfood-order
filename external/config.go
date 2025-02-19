@@ -62,6 +62,7 @@ func initConfig() (viper.Viper, error) {
 	cfg := viper.New()
 	var err error
 	initDefaults(cfg)
+	cfg.AutomaticEnv()
 	// workaround because viper does not resolve envs when unmarshalling
 	for _, key := range cfg.AllKeys() {
 		val := cfg.Get(key)
@@ -73,11 +74,11 @@ func initConfig() (viper.Viper, error) {
 
 func initDefaults(config *viper.Viper) {
 	config.SetDefault("server.host", "0.0.0.0:8000")
-	config.SetDefault("DATABASE_HOST", "orders-db.cemq7svvd1t8.us-east-1.rds.amazonaws.com")
+	config.SetDefault("DATABASE_HOST", "postgres")
 	config.SetDefault("DATABASE_PORT", "5432")
-	config.SetDefault("DATABASE_USER", "postgres")
-	config.SetDefault("DATABASE_PASSWORD", "postgres")
-	config.SetDefault("DATABASE_DBNAME", "orders")
+	config.SetDefault("DATABASE_USER", "root")
+	config.SetDefault("DATABASE_PASSWORD", "root")
+	config.SetDefault("DATABASE_DBNAME", "root")
 	config.SetDefault("FASTFOOD_PAYMENT_APP_URL", "http://a71651bd431364e399616a6c8cb93a80-882634322.us-east-1.elb.amazonaws.com:8000")
 	config.SetDefault("HTTP_TIMEOUT", 5*time.Second)
 }
